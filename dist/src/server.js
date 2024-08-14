@@ -6,11 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const connection_1 = require("./database/connection");
 const usuario_route_1 = __importDefault(require("./routes/usuario.route"));
+const contacto_route_1 = __importDefault(require("./routes/contacto.route"));
+const taller_route_1 = __importDefault(require("./routes/taller.route"));
 const cors_1 = __importDefault(require("cors"));
 class Server {
     constructor() {
         this.apiPaths = {
             usuario: "/api/v1/usuario",
+            contacto: "/api/v1/contacto",
+            taller: "/api/v1/taller"
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "3000";
@@ -33,6 +37,8 @@ class Server {
     routes() {
         this.app.use((0, cors_1.default)());
         this.app.use(this.apiPaths.usuario, usuario_route_1.default);
+        this.app.use(this.apiPaths.contacto, contacto_route_1.default);
+        this.app.use(this.apiPaths.taller, taller_route_1.default);
     }
     //función 
     listen() {

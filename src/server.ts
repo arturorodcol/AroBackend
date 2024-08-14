@@ -1,6 +1,8 @@
 import express, { Application, Request, Response } from "express";
 import { dbConnection } from "./database/connection";
 import usuarioRoutes from "./routes/usuario.route";
+import contactoRoutes from "./routes/contacto.route";
+import tallerRoutes from "./routes/taller.route"; 
 import cors from "cors";
 
 class Server {
@@ -8,6 +10,8 @@ class Server {
     private port: string;
     private apiPaths = {
         usuario: "/api/v1/usuario",
+        contacto: "/api/v1/contacto",
+        taller: "/api/v1/taller"
     }
 
     constructor() {
@@ -36,6 +40,8 @@ class Server {
     routes(): void{
         this.app.use(cors());
         this.app.use(this.apiPaths.usuario, usuarioRoutes);
+        this.app.use(this.apiPaths.contacto, contactoRoutes);
+        this.app.use(this.apiPaths.taller, tallerRoutes);
     }
 
     //función 
