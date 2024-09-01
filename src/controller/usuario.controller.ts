@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import UsuarioModel from "../models/usuario.models";
-
+import bcrypt from "bcryptjs";
 
 export const crearUsuario = async (req: Request, res: Response) => {
     const {body} = req;
@@ -19,10 +19,14 @@ export const crearUsuario = async (req: Request, res: Response) => {
                 msg: `Ya existe el login ${login} creado`,
             });
         }
-        // instancia de mi modelo//
+
         const nuevoUsuario = new UsuarioModel({ 
-            ...body,
+            ...body, //desestructure todo el boby, completo
         });
+
+        //encriptación de contraseña
+        const salt = bcrypt.genSaltSync(10);
+        nuevoUsuario.password = bcrypt.hashSync(password, salt);
       
         const usuarioCreado = await nuevoUsuario.save(); //guardar usuario//
 

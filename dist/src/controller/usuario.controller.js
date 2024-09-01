@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarUsuarios = exports.getUnUsuario = exports.getUsuarios = exports.crearUsuario = void 0;
 const usuario_models_1 = __importDefault(require("../models/usuario.models"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     const { login, password } = body;
@@ -29,8 +30,10 @@ const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 msg: `Ya existe el login ${login} creado`,
             });
         }
-        // instancia de mi modelo//
         const nuevoUsuario = new usuario_models_1.default(Object.assign({}, body));
+        //encriptación de contraseña
+        const salt = bcryptjs_1.default.genSaltSync(10);
+        nuevoUsuario.password = bcryptjs_1.default.hashSync(password, salt);
         const usuarioCreado = yield nuevoUsuario.save(); //guardar usuario//
         res.status(200).json({
             ok: true,

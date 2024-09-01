@@ -8,9 +8,9 @@ const UsuarioSchema = new Schema ({
     tipoDocumento: { type: String, required: true},
     numeroDocumento: { type: Number, required: true, unique: true },
     login: {type: String, required: true, unique: true },
-    // password: {type: String, required: true},
-    // rol: {type: String, required: true, default: "CLIENTE"},
-    // estado: { type: Boolean, required: true, default: true},
+    password: {type: String, required: true},
+    rol: {type: String, required: true, default: "CLIENTE"},
+    estado: { type: Boolean, required: true, default: true},
     createdAt: { type: Date, default: Date.now() },
     updateAt: { type: Date, default: Date.now() }
 });

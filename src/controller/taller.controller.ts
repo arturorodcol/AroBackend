@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import UsuarioModel from "../models/usuario.models";
 import TallerModel from "../models/taller.models";
 
 export const crearTaller = async (req: Request, res: Response) => {
@@ -70,7 +69,7 @@ export const eliminarTaller = async (req: Request, res: Response) => {
       res.json({
         ok: true,
         msg: "Taller eliminado",
-
+        tallerEliminado,
       });
     } catch (error) {
       res.status(400).json({

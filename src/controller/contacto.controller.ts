@@ -32,3 +32,37 @@ export const contactoUsuario = async (req: Request, res: Response) => {
         });
     }
 }
+
+export const revisarContactoUsuarios = async (req: Request, res: Response) => {
+    try {
+        const contactos = await ContactoModel.find();
+        res.status(200).json({
+            ok: true,
+            contactos,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al consultar usuarios por contactar", 
+        });
+    }
+}
+
+export const eliminarContactoUsuarios = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+
+        const eliminarContactoUsuario = await ContactoModel.findByIdAndDelete(id); // actualizar recibe tres parametros id, info que envio y revolución de lo que actualize //
+        res.status(200).json({
+            ok: true,
+            eliminarContactoUsuario, 
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al eliminar usuario", 
+        });
+    }
+}

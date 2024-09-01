@@ -72,6 +72,7 @@ const eliminarTaller = (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.json({
             ok: true,
             msg: "Taller eliminado",
+            tallerEliminado,
         });
     }
     catch (error) {
