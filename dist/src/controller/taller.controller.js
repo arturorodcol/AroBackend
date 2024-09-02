@@ -14,19 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.actualizarTaller = exports.eliminarTaller = exports.consultarTaller = exports.crearTaller = void 0;
 const taller_models_1 = __importDefault(require("../models/taller.models"));
+const usuario_models_1 = __importDefault(require("../models/usuario.models"));
 const crearTaller = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     const idUsuario = body.usuario;
     try {
-        /*  //Esta linea describe función, para asociar a usuario logeado a la creación de una servicio
-        const usuario = await UsuarioModel.findById(idUsuario);
-        if(!usuario) {
+        //Esta linea describe función, para asociar a usuario logeado a la creación de una servicio 
+        const usuario = yield usuario_models_1.default.findById(idUsuario);
+        if (!usuario) {
             return res.status(404).json({
                 ok: false,
                 msg: "Usuario no encontrado",
             });
         }
-        */
         const tallerNuevo = new taller_models_1.default(Object.assign({ usuario: idUsuario }, body));
         const tallerCreado = yield tallerNuevo.save();
         res.status(200).json({

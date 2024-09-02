@@ -1,5 +1,7 @@
 import { model, Model, Schema } from "mongoose";
 
+//Puedo mejorar este componente al crear interfaces //revisar video 27
+
 const TallerSchema = new Schema ({
     nombre : { type: String, required: true },
 	descripcion: { type: String, required: true },

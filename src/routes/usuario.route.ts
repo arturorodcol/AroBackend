@@ -2,10 +2,12 @@ import { Router } from "express";
 import { crearUsuario, eliminarUsuarios, getUnUsuario, getUsuarios } from "../controller/usuario.controller";
 import { check } from "express-validator";
 import { validateFields } from "../middlewares/validate-fields";
+import validateJWT from "../middlewares/validate-jwt";
 
 const router = Router();
 
-router.post("/",
+router.post(
+    "/",
     [
         check("nombre", "El nombre es obligatorio").not().isEmpty(),
         check("tipoDocumento", "El tipo de documento es obligatorio").not().isEmpty(),
@@ -16,8 +18,9 @@ router.post("/",
         validateFields,
     ],
     crearUsuario);
-router.get("/", getUsuarios);
-router.get("/:id", getUnUsuario);
-router.delete("/:id", eliminarUsuarios);
+router.get("/",
+    validateJWT, getUsuarios);
+router.get("/:id", validateJWT, getUnUsuario);
+router.delete("/:id", validateJWT, eliminarUsuarios);
 
 export default router;

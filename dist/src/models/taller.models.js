@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
+//Puedo mejorar este componente al crear interfaces //revisar video 27
 const TallerSchema = new mongoose_1.Schema({
     nombre: { type: String, required: true },
     descripcion: { type: String, required: true },

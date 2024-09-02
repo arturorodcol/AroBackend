@@ -3,6 +3,7 @@ import { dbConnection } from "./database/connection";
 import usuarioRoutes from "./routes/usuario.route";
 import contactoRoutes from "./routes/contacto.route";
 import tallerRoutes from "./routes/taller.route"; 
+import authRoutes from "./routes/auth.route"; 
 import cors from "cors";
 
 class Server {
@@ -11,7 +12,8 @@ class Server {
     private apiPaths = {
         usuario: "/api/v1/usuario",
         contacto: "/api/v1/contacto",
-        taller: "/api/v1/taller"
+        taller: "/api/v1/taller",
+        auth: "/api/v1/auth",
     }
 
     constructor() {
@@ -42,6 +44,7 @@ class Server {
         this.app.use(this.apiPaths.usuario, usuarioRoutes);
         this.app.use(this.apiPaths.contacto, contactoRoutes);
         this.app.use(this.apiPaths.taller, tallerRoutes);
+        this.app.use(this.apiPaths.auth, authRoutes);
     }
 
     //función 

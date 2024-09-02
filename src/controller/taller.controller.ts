@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import TallerModel from "../models/taller.models";
+import UsuarioModel from "../models/usuario.models";
 
 export const crearTaller = async (req: Request, res: Response) => {
     const { body } = req;
     const idUsuario = body.usuario;
 
     try {
-        /*  //Esta linea describe función, para asociar a usuario logeado a la creación de una servicio 
+        //Esta linea describe función, para asociar a usuario logeado a la creación de una servicio 
         const usuario = await UsuarioModel.findById(idUsuario);
         if(!usuario) {
             return res.status(404).json({
@@ -14,7 +15,6 @@ export const crearTaller = async (req: Request, res: Response) => {
                 msg: "Usuario no encontrado",
             }); 
         }
-        */
 
         const tallerNuevo = new TallerModel({
             usuario: idUsuario,
