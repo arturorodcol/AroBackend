@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 const jwt = require("jsonwebtoken");
 
 //Puedo aprovechar esta interface para poder implementar en otras lineas del codigo, por ejemplo, para registrar el ID del usuario que registra un taller
-interface CustomRequest extends Request{
+export interface CustomRequest extends Request{
     _id?: number;
 }
 

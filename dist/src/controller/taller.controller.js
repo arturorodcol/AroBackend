@@ -17,17 +17,17 @@ const taller_models_1 = __importDefault(require("../models/taller.models"));
 const usuario_models_1 = __importDefault(require("../models/usuario.models"));
 const crearTaller = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    const idUsuario = body.usuario;
+    const id = req._id;
     try {
         //Esta linea describe función, para asociar a usuario logeado a la creación de una servicio 
-        const usuario = yield usuario_models_1.default.findById(idUsuario);
+        const usuario = yield usuario_models_1.default.findById(id);
         if (!usuario) {
             return res.status(404).json({
                 ok: false,
                 msg: "Usuario no encontrado",
             });
         }
-        const tallerNuevo = new taller_models_1.default(Object.assign({ usuario: idUsuario }, body));
+        const tallerNuevo = new taller_models_1.default(Object.assign({ usuario: id }, body));
         const tallerCreado = yield tallerNuevo.save();
         res.status(200).json({
             ok: true,
@@ -46,9 +46,10 @@ const crearTaller = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.crearTaller = crearTaller;
 const consultarTaller = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        // devolver listado de talleres con información que se selecciona 
         const talleres = yield taller_models_1.default.find().populate({
             path: 'nombre',
-            select: 'nombre fecha hora'
+            select: 'nombre, fecha, hora'
         });
         res.json({
             ok: true,
