@@ -34,6 +34,8 @@ class Server {
 
     // funcion validar que esta bien antes de que ejecute API
     middlewares() {
+        //permiso para consumir API desde dominio especifico
+        this.app.use(cors())
         // Lectura del body en formato JSON
         this.app.use(express.json()); 
         this.miPrimeraApi();

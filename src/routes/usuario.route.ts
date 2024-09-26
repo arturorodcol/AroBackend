@@ -17,9 +17,11 @@ router.post(
         check("password", "La contraseña es obligatoria").not().isEmpty(),
         validateFields,
     ],
+    validateJWT,
     crearUsuario);
-router.get("/",
-    validateJWT, getUsuarios);
+    //validacion
+router.get("/", 
+    getUsuarios);
 router.get("/:id", validateJWT, getUnUsuario);
 router.delete("/:id", validateJWT, eliminarUsuarios);
 
