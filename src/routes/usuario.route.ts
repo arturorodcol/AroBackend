@@ -17,7 +17,6 @@ router.post(
         check("password", "La contraseña es obligatoria").not().isEmpty(),
         validateFields,
     ],
-    validateJWT,
     crearUsuario);
     //validacion
 router.get("/", 
